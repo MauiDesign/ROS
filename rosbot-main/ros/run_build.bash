@@ -1,1 +1,0 @@
-git pull && rosdep install -i --from-path src --rosdistro foxy -y && colcon build
