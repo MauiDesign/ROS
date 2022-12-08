@@ -1,0 +1,13 @@
+http://docs.ros.org/en/rolling/Installation/Ubuntu-Install-Debians.html
+
+sudo apt install ros-rolling-desktop-full
+
+# Replace ".bash" with your shell if you're not using bash
+# Possible values are: setup.bash, setup.sh, setup.zsh
+source /opt/ros/rolling/setup.bash
+
+source /opt/ros/rolling/setup.bash
+ros2 run demo_nodes_cpp talker
+
+source /opt/ros/rolling/setup.bash
+ros2 run demo_nodes_py listener

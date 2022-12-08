@@ -1,0 +1,90 @@
+
+####################################
+#
+# Static Transformer:
+# https://articulatedrobotics.xyz/ready-for-ros-6-tf/
+# ----------------------------------------------------
+#
+####################################
+
+# Terminal 1
+# Syntax ros2 run tf2_ros static_transform_publisher x y z yaw pitch roll parent_frame child_frame
+
+source /opt/ros/rolling/setup.bash
+ros2 run tf2_ros static_transform_publisher 2 1 0 0.785 0 0 world robot_1
+
+# Terminal 2
+source /opt/ros/rolling/setup.bash
+ros2 run tf2_ros static_transform_publisher 1 0 0 0 0 0 robot_1 robot_2
+
+# Terminal 3
+source /opt/ros/rolling/setup.bash
+ros2 run rviz2 rviz2
+
+
+# Once in RViz:
+
+1. Add TF
+2. Change Fix Frame  to "world"
+3. TF will display.
+4. Show names of TF
+4. Use terminal 1 to change rotation. From 0.785 radian  to 1.57 in terminal 1. Control-C to interrupt robot_1
+	ros2 run tf2_ros static_transform_publisher 2 1 0 1.57 0 0 world robot_1
+5. Add a transformer in new terminal e.g. Terminal 4.
+
+
+Terminal 4
+source /opt/ros/rolling/setup.bash
+ros2 run tf2_ros static_transform_publisher 1 0 0 0 0 0 robot_2 robot_3
+
+
+# Shutdown RViz and terminals
+
+
+
+# Install Dynamic transformer
+sudo apt install ros-rolling-xacro ros-rolling-joint-state publisher-gui
+
+# Configure Syntax for macro : ros2 run robot_state_publisher robot_state_publisher --ros-args -p robot_description:=(something here)
+# Download example from https://gist.github.com/joshnewans
+
+ros2 run robot_state_publisher robot_state_publisher --ros-args -p robot_description:="$(xacro ~/ROS/example_robot.urdf.xacro)"
+
+
+# Publish macro example
+
+source /opt/ros/rolling/setup.bash
+ros2 run joint_state_publisher_gui joint_state_publisher_gui
+
+
+
+# Launch rviz
+
+source /opt/ros/rolling/setup.bash
+rviz2
+
+1. Add robot model
+2. Set robot model description topic = "/robot_description"
+
+
+
+# Debugging:
+
+1. Install tf2_tools
+# https://docs.ros.org/en/rolling/Tutorials/Intermediate/Tf2/Introduction-To-Tf2.html
+
+sudo apt-get install ros-rolling-turtle-tf2-py ros-rolling-tf2-tools ros-rolling-tf-transformations
+
+
+
+# Test turtle demo:
+
+ros2 launch turtle_tf2_py turtle_tf2_demo.launch.py
+ros2 run turtlesim turtle_teleop_key
+
+
+# Print pdf of TF's
+
+source /opt/ros/rolling/setup.bash
+ros2 run tf2_tools view_frames.py
+
