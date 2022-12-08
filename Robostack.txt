@@ -1,0 +1,42 @@
+
+# MacBook Pro M1 & Parallels ROS installation:
+
+
+# https://www.youtube.com/watch?v=zF7Pbq4Puvg
+
+# https://medium.com/robostack/cross-platform-conda-packages-for-ros-fa1974fd1de3
+
+3 https://github.com/RoboStack/ros-noetic
+
+# Download and install Miniconda-py38_4.12.0-Linux-aarch64.sh
+
+$ bash Miniconda-py38_4.12.0-Linux-aarch64.sh
+
+
+# Create Conda environment:
+
+$ conda create -n ROS python=3.8
+$ conda activate ROS
+$ conda install python=3.9
+$ conda config --add channels conda-forge
+$ conda config --add channels robostack
+$ conda config --set channel_priority strict
+$ conda install ros-rolling-desktop-full
+
+
+# To run $ rviz you are require two terminals:
+# First terminal:
+$ conda activate ROS
+$ roscore
+# Second terminal:
+$ conda activate ROS
+$ rviz
+
+
+# https://wiki.ros.org/ROS/Tutorials/UnderstandingTopics
+# Turtlesim:
+
+$ rosrun turtlesim turtlesim_node
+$ https://wiki.ros.org/ROS/Tutorials/UnderstandingTopics
+
+$ rosrun rqt_graph rqt_graph
